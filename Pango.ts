@@ -45,7 +45,10 @@ export class Pango {
             })
             .parse(projectOptions.pangoArgs);
 
-        return this.runTarget(projectOptions);
+        return this.runTarget(projectOptions)
+            .catch((err) => {
+                console.error(err);
+            });
     }
 
     protected runTarget(projectOptions: ProjectOptions): Promise<void> {
@@ -90,7 +93,7 @@ export class Pango {
         for (const taskKey of Object.keys(tasks)) {
             const task = tasks[taskKey];
             this.validateTask(taskKey, task);
-            const taskRun = function (task: Task) {
+            const taskRun = (task: Task) => {
                 const taskName = task.name ? task.name : taskKey;
                 const taskOptions: TaskOptions = {
                     projectOptions,

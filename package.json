@@ -6,7 +6,7 @@
   "author": "Joe Ferner <joe@fernsroth.com>",
   "license": "MIT",
   "bin": {
-    "pango": "./dist/pango.sh"
+    "pango": "./pango.sh"
   },
   "scripts": {
     "prepublish": "npm run build",
