@@ -139,7 +139,7 @@ export class Pango {
     }
 
     private validateTask(taskKey: string, task: Task) {
-        if (!task.getPostRequisites
+        if (!task.getPrerequisites
             && !task.getPostRequisites
             && !task.run) {
             throw new Error(`Invalid task: ${taskKey}: ${task}`);

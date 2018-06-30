@@ -5,6 +5,9 @@
   "main": "dist/index.js",
   "author": "Joe Ferner <joe@fernsroth.com>",
   "license": "MIT",
+  "bin": {
+    "pango": "./dist/pango.sh"
+  },
   "scripts": {
     "prepublish": "npm run build",
     "build": "tsc",

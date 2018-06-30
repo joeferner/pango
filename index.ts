@@ -24,3 +24,4 @@ export {Target} from "./Target";
 export {Task, Tasks} from "./Task";
 export {TaskOptions} from "./TaskOptions";
 export {NopTask} from "./NopTask";
+export {FileUtils} from "./FileUtils";
