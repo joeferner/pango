@@ -3,6 +3,7 @@ import {ProjectOptions} from "./ProjectOptions";
 
 export class HelpTarget implements Target {
     helpMessage: string = 'Prints help message';
+    preRequisites = ['initialize'];
 
     run(projectOptions: ProjectOptions): Promise<void | Targets | string[]> {
         const targets = projectOptions.targets;
