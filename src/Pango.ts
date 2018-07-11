@@ -85,8 +85,13 @@ export class Pango {
             const opts = <any>yargs
                 .option('v', {
                     alias: 'verbose',
-                    describe: 'verbose output',
+                    describe: 'sets the log level to debug',
                     type: 'boolean'
+                })
+                .option('loglevel', {
+                    describe: 'sets the log level',
+                    choices: ['debug', 'info', 'warn', 'error'],
+                    type: 'string'
                 })
                 .option('j', {
                     alias: 'concurrency',
@@ -94,7 +99,12 @@ export class Pango {
                     type: 'number'
                 })
                 .parse(dashedArgs);
-            projectOptions.verbose = 'verbose' in opts ? opts.verbose : false;
+            projectOptions.logLevel = 'verbose' in opts && opts.verbose
+                ? 'debug'
+                : 'loglevel' in opts
+                    ? opts.loglevel
+                    : 'info';
+            console.log('projectOptions.logLevel', projectOptions.logLevel);
             projectOptions.concurrency = opts.concurrency || 1;
 
             for (let targetName of Object.keys(projectOptions.targets)) {
@@ -107,7 +117,7 @@ export class Pango {
             await ComponentLoader.loadComponents(projectOptions);
             await this.runTargets(projectOptions);
         } catch (err) {
-            if (!projectOptions || projectOptions.verbose) {
+            if (!projectOptions || projectOptions.logLevel === 'debug') {
                 console.error(err);
             } else {
                 console.error(err.message ? err.message : err);

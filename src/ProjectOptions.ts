@@ -13,7 +13,7 @@ export interface ProjectOptions {
     requestedTargets?: string[];
     defaultTargets?: string[];
     args?: string[];
-    verbose: boolean;
+    logLevel: string;
     concurrency?: number;
     targets?: { [name: string]: Target; };
     components?: ComponentOrString[];

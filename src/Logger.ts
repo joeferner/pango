@@ -1,29 +1,49 @@
 import {ProjectOptions} from "./ProjectOptions";
 
 export class Logger {
-    private _projectOptions: ProjectOptions;
+    private projectOptions: ProjectOptions;
 
     constructor(projectOptions: ProjectOptions) {
-        this._projectOptions = projectOptions;
+        this.projectOptions = projectOptions;
     }
 
     debug(message?: any, ...optionalParams: any[]): void {
-        if (this._projectOptions.verbose) {
+        if (this.isDebug()) {
             console.log(message, ...optionalParams);
         }
     }
 
     info(message?: any, ...optionalParams: any[]): void {
-        if (this._projectOptions.verbose) {
+        if (this.isInfo()) {
             console.log(message, ...optionalParams);
         }
     }
 
     warn(message?: any, ...optionalParams: any[]): void {
-        console.log(message, ...optionalParams);
+        if (this.isWarn()) {
+            console.log(message, ...optionalParams);
+        }
     }
 
     error(message?: any, ...optionalParams: any[]): void {
-        console.error(message, ...optionalParams);
+        if (this.isError()) {
+            console.error(message, ...optionalParams);
+        }
+    }
+
+    public isDebug(): boolean {
+        return this.projectOptions.logLevel === 'debug';
+    }
+
+    public isInfo(): boolean {
+        return this.isDebug() || this.projectOptions.logLevel === 'info';
+    }
+
+    public isWarn(): boolean {
+        return this.isInfo() || this.projectOptions.logLevel === 'warn';
+    }
+
+    public isError(): boolean {
+        return this.isWarn() || this.projectOptions.logLevel === 'error';
     }
 }

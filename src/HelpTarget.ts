@@ -1,5 +1,6 @@
 import {Target, Targets} from "./Target";
 import {ProjectOptions} from "./ProjectOptions";
+import {Logger} from "./Logger";
 
 export class HelpTarget implements Target {
     helpMessage: string = 'Prints help message';
@@ -8,7 +9,7 @@ export class HelpTarget implements Target {
     run(projectOptions: ProjectOptions): Promise<void | Targets | string[]> {
         const targets = projectOptions.targets;
         let targetKeys = Object.keys(targets);
-        if (!projectOptions.verbose) {
+        if (projectOptions.logger.isDebug()) {
             targetKeys = targetKeys.filter(targetKey => {
                 return targets[targetKey].helpMessage;
             });
