@@ -91,20 +91,21 @@ export class Pango {
                 .option('loglevel', {
                     describe: 'sets the log level',
                     choices: ['debug', 'info', 'warn', 'error'],
-                    type: 'string'
+                    type: 'string',
+                    default: 'info'
                 })
                 .option('j', {
                     alias: 'concurrency',
                     describe: 'number of multiple items to run at once',
-                    type: 'number'
+                    type: 'number',
+                    default: 1
                 })
                 .parse(dashedArgs);
-            projectOptions.logLevel = 'verbose' in opts && opts.verbose
+            projectOptions.logLevel = ('verbose' in opts && opts.verbose)
                 ? 'debug'
-                : 'loglevel' in opts
+                : ('loglevel' in opts)
                     ? opts.loglevel
                     : 'info';
-            console.log('projectOptions.logLevel', projectOptions.logLevel);
             projectOptions.concurrency = opts.concurrency || 1;
 
             for (let targetName of Object.keys(projectOptions.targets)) {
