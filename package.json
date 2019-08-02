@@ -1,6 +1,6 @@
 {
   "name": "pango",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Node based build tool",
   "main": "dist/index.js",
   "author": "Joe Ferner <joe@fernsroth.com>",
